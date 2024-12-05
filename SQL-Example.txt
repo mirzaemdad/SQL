@@ -1,0 +1,174 @@
+
+1| CREATE DATABASE testDB;
+
+2|CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+3| Nott Null
+
+    CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255) NOT NULL,
+    Age int
+);
+
+4| PRIMARY KEY 
+
+    CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (ID)
+);
+5| FOREIGN KEY
+
+    CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+6|  AUTO_INCREMENT
+  CREATE TABLE Persons (
+    Personid int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (Personid)
+);
+
+7| Select
+   SELECT * FROM Customers;
+
+8| Where Select
+   SELECT * FROM Customers
+   WHERE Country='Mexico';
+
+9| AND, OR, NOT
+
+// AND
+   SELECT * FROM Customers
+   WHERE Country='Germany' AND City='Berlin';
+
+// OR
+SELECT * FROM Customers
+WHERE Country = 'Germany' OR Country = 'Spain';
+
+//NOT
+   SELECT * FROM Customers
+   WHERE NOT Country = 'Germany';
+
+10| ORDER BY
+//DESC
+   SELECT * FROM Customers
+   ORDER BY Country DESC;
+
+// ASC
+SELECT * FROM Customers
+ORDER BY Country ASC, CustomerName DESC;
+
+11| INSERT INTO
+   INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
+
+12| NULL VALUES
+   SELECT CustomerName, ContactName, Address
+   FROM Customers
+   WHERE Address IS NULL;
+
+13| UPDATE 
+    UPDATE Customers
+    SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
+    WHERE CustomerID = 1;
+
+14| DELETE
+   DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+
+15| LIMIT
+   SELECT * FROM Customers
+   WHERE Country='Germany'
+   LIMIT 3;
+
+16| MIN AND MAX
+   SELECT MAX(Price) AS LargestPrice
+   FROM Products;
+
+17 | COUNT, AVG, SUM
+//COUNT
+   SELECT COUNT(ProductID)
+   FROM Products;
+
+//AVG
+  SELECT AVG(Price)
+  FROM Products;
+
+// SUM
+   SELECT SUM(Quantity)
+   FROM OrderDetails;
+
+18| LIKE
+// starting with "a":
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%';
+
+//ending with "a":
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%a';
+
+//CustomerName that have "or" in any position;
+
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%or%';
+
+//CustomerName that have "r" in the second position:
+SELECT * FROM Customers
+WHERE CustomerName LIKE '_r%';
+
+//CustomerName that starts with "a" and are at least 3
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a__%';
+
+//ContactName that starts with "a" and ends with "o":
+SELECT * FROM Customers
+WHERE ContactName LIKE 'a%o';
+
+//CustomerName that does NOT start with "a":
+SELECT * FROM Customers
+WHERE CustomerName NOT LIKE 'a%';
+
+19| BETWEEN
+  SELECT * FROM Products
+WHERE Price BETWEEN 10 AND 20
+AND CategoryID NOT IN (1,2,3);
+
+20| ANY , ALL
+
+// ANY
+  SELECT ProductName
+FROM Products
+WHERE ProductID = ANY
+  (SELECT ProductID
+  FROM OrderDetails
+  WHERE Quantity = 10);
+
+//ALL
+
+SELECT ProductName
+FROM Products
+WHERE ProductID = ALL
+  (SELECT ProductID
+  FROM OrderDetails
+  WHERE Quantity = 10);
+
+
+
+
+
